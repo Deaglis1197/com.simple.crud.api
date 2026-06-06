@@ -1,15 +1,14 @@
 package com.simple.crud.api.base.controller;
-import lombok.RequiredArgsConstructor;
 
-import org.apache.catalina.connector.Response;
+import com.simple.crud.api.base.dto.ConsoleDto;
+import com.simple.crud.api.base.service.BaseService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.simple.crud.api.base.service.BaseService;
-import com.simple.crud.api.base.dto.ConsoleDto;
 
 @RestController
 @RequestMapping("/base-controller")
@@ -19,12 +18,9 @@ public class BaseController {
     private final BaseService baseService;
 
     @PostMapping("/write-console")
-    public ResponseEntity<Response> writeConsole(@RequestBody ConsoleDto request) {
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> writeConsole(@RequestBody ConsoleDto request) {
         baseService.writeConsole(request.getMessage());
-
         return ResponseEntity.ok(null);
     }
-
-
-
 }
