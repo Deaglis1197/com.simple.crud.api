@@ -1,4 +1,4 @@
-package com.simple.crud.api.jwt;
+package com.simple.crud.api.usermanagement.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

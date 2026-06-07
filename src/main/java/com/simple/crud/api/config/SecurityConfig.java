@@ -1,6 +1,6 @@
 package com.simple.crud.api.config;
 
-import com.simple.crud.api.jwt.JwtAuthFilter;
+import com.simple.crud.api.usermanagement.jwt.JwtAuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
