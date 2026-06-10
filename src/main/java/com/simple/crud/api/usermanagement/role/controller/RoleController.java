@@ -19,7 +19,7 @@ public class RoleController {
 
     private final RoleService roleService;
 
-    @GetMapping
+    @GetMapping("/get-all")
     @PreAuthorize("hasAuthority(@auth.READ_ROLE)")
     public ResponseEntity<List<RoleResponse>> getAll() {
         return ResponseEntity.ok(roleService.getAll());
@@ -31,7 +31,7 @@ public class RoleController {
         return ResponseEntity.ok(roleService.getAllActions());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get-by-id/{id}")
     @PreAuthorize("hasAuthority(@auth.READ_ROLE)")
     public ResponseEntity<RoleResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(roleService.getById(id));
@@ -43,13 +43,13 @@ public class RoleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(roleService.create(request));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     @PreAuthorize("hasAuthority(@auth.UPDATE_ROLE)")
     public ResponseEntity<RoleResponse> update(@PathVariable Long id, @RequestBody RoleRequest request) {
         return ResponseEntity.ok(roleService.update(id, request));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasAuthority(@auth.DELETE_ROLE)")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         roleService.delete(id);
