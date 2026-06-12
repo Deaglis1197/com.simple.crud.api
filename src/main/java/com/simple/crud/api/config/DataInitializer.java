@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -36,8 +37,15 @@ public class DataInitializer implements ApplicationRunner {
         Role adminRole = roleRepository.findByName("ADMIN")
                 .orElseGet(() -> roleRepository.save(Role.builder().name("ADMIN").actions(allActions).build()));
 
+        Set<Action> userNoteActions = EnumSet.of(
+                        ActionType.READ_NOTE, ActionType.CREATE_NOTE,
+                        ActionType.UPDATE_NOTE, ActionType.DELETE_NOTE)
+                .stream()
+                .map(type -> actionRepository.findByName(type).orElseThrow())
+                .collect(Collectors.toSet());
+
         if (roleRepository.findByName("USER").isEmpty()) {
-            roleRepository.save(Role.builder().name("USER").actions(Set.of()).build());
+            roleRepository.save(Role.builder().name("USER").actions(userNoteActions).build());
         }
 
         if (userRepository.count() == 0) {

@@ -61,13 +61,17 @@ public class UserService {
         return toResponse(userDetailRepository.save(detail));
     }
 
-    private void requireSelfOrAction(Long userId, ActionType requiredAction) {
+    public User getCurrentUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User currentUser = userRepository.findByUsername(auth.getName())
+        return userRepository.findByUsername(auth.getName())
                 .orElseThrow(() -> new IllegalStateException("Authenticated user not found"));
+    }
+
+    private void requireSelfOrAction(Long userId, ActionType requiredAction) {
+        User currentUser = getCurrentUser();
         boolean isSelf = currentUser.getId().equals(userId);
-        boolean hasAction = auth.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals(requiredAction.name()));
+        boolean hasAction = currentUser.getAuthorities().stream()
+                .anyMatch(a -> requiredAction.name().equals(a.getAuthority()));
         if (!isSelf && !hasAction) {
             throw new AccessDeniedException("Access denied");
         }

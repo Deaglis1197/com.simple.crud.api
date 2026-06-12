@@ -17,7 +17,13 @@ public enum ActionType {
         //</editor-fold>
         //<editor-fold desc="User Controller">
             READ_USER_INFO,
-            USER_INFO_EDIT;
+            USER_INFO_EDIT,
+        //</editor-fold>
+        //<editor-fold desc="Note Controller">
+            READ_NOTE,
+            CREATE_NOTE,
+            UPDATE_NOTE,
+            DELETE_NOTE;
         //</editor-fold>
     //</editor-fold>
 
@@ -39,6 +45,13 @@ public enum ActionType {
         //<editor-fold desc="User Controller Constants">
         public final String READ_USER_INFO = ActionType.READ_USER_INFO.name();
         public final String USER_INFO_EDIT = ActionType.USER_INFO_EDIT.name();
+        //</editor-fold>
+
+        //<editor-fold desc="Note Controller Constants">
+        public final String READ_NOTE   = ActionType.READ_NOTE.name();
+        public final String CREATE_NOTE = ActionType.CREATE_NOTE.name();
+        public final String UPDATE_NOTE = ActionType.UPDATE_NOTE.name();
+        public final String DELETE_NOTE = ActionType.DELETE_NOTE.name();
         //</editor-fold>
     }
 }
