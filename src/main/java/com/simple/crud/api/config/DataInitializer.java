@@ -37,15 +37,17 @@ public class DataInitializer implements ApplicationRunner {
         Role adminRole = roleRepository.findByName("ADMIN")
                 .orElseGet(() -> roleRepository.save(Role.builder().name("ADMIN").actions(allActions).build()));
 
-        Set<Action> userNoteActions = EnumSet.of(
+        Set<Action> userActions = EnumSet.of(
                         ActionType.READ_NOTE, ActionType.CREATE_NOTE,
-                        ActionType.UPDATE_NOTE, ActionType.DELETE_NOTE)
+                        ActionType.UPDATE_NOTE, ActionType.DELETE_NOTE,
+                        ActionType.READ_DOCUMENT, ActionType.CREATE_DOCUMENT,
+                        ActionType.DELETE_DOCUMENT)
                 .stream()
                 .map(type -> actionRepository.findByName(type).orElseThrow())
                 .collect(Collectors.toSet());
 
         if (roleRepository.findByName("USER").isEmpty()) {
-            roleRepository.save(Role.builder().name("USER").actions(userNoteActions).build());
+            roleRepository.save(Role.builder().name("USER").actions(userActions).build());
         }
 
         if (userRepository.count() == 0) {

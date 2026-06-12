@@ -23,7 +23,12 @@ public enum ActionType {
             READ_NOTE,
             CREATE_NOTE,
             UPDATE_NOTE,
-            DELETE_NOTE;
+            DELETE_NOTE,
+        //</editor-fold>
+        //<editor-fold desc="Document Controller">
+            READ_DOCUMENT,
+            CREATE_DOCUMENT,
+            DELETE_DOCUMENT;
         //</editor-fold>
     //</editor-fold>
 
@@ -52,6 +57,12 @@ public enum ActionType {
         public final String CREATE_NOTE = ActionType.CREATE_NOTE.name();
         public final String UPDATE_NOTE = ActionType.UPDATE_NOTE.name();
         public final String DELETE_NOTE = ActionType.DELETE_NOTE.name();
+        //</editor-fold>
+
+        //<editor-fold desc="Document Controller Constants">
+        public final String READ_DOCUMENT   = ActionType.READ_DOCUMENT.name();
+        public final String CREATE_DOCUMENT = ActionType.CREATE_DOCUMENT.name();
+        public final String DELETE_DOCUMENT = ActionType.DELETE_DOCUMENT.name();
         //</editor-fold>
     }
 }
